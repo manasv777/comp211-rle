@@ -1,0 +1,66 @@
+RLE experiment: two binary bytes per record (count, value).
+Payload sizes only; hex displays, terminators and file headers are excluded.
+A count of 06 hex means 6; value 41 hex is ASCII 'A'.
+
+long_runs
+  Input: "AAAAAABBBBBBCCCCCC"
+  Encoded [count value] pairs (hex): [06 41] [06 42] [06 43] 
+  Original: 18 bytes | Records: 3 | Encoded: 6 bytes
+  Encoded/original: 0.333 | Space saved: 66.7%
+  Decoded equals input: PASS
+
+one_run
+  Input: "AAAAAAAAAAAA"
+  Encoded [count value] pairs (hex): [0C 41] 
+  Original: 12 bytes | Records: 1 | Encoded: 2 bytes
+  Encoded/original: 0.167 | Space saved: 83.3%
+  Decoded equals input: PASS
+
+pairs
+  Input: "AABBCCDD"
+  Encoded [count value] pairs (hex): [02 41] [02 42] [02 43] [02 44] 
+  Original: 8 bytes | Records: 4 | Encoded: 8 bytes
+  Encoded/original: 1.000 | Space saved: 0.0%
+  Decoded equals input: PASS
+
+alternating
+  Input: "ABABABABABAB"
+  Encoded [count value] pairs (hex): [01 41] [01 42] [01 41] [01 42] [01 41] [01 42] [01 41] [01 42] [01 41] [01 42] [01 41] [01 42] 
+  Original: 12 bytes | Records: 12 | Encoded: 24 bytes
+  Encoded/original: 2.000 | Space saved: -100.0%
+  Decoded equals input: PASS
+
+repeated_sequence
+  Input: "ABCABCABCABC"
+  Encoded [count value] pairs (hex): [01 41] [01 42] [01 43] [01 41] [01 42] [01 43] [01 41] [01 42] [01 43] [01 41] [01 42] [01 43] 
+  Original: 12 bytes | Records: 12 | Encoded: 24 bytes
+  Encoded/original: 2.000 | Space saved: -100.0%
+  Decoded equals input: PASS
+
+digit_values
+  Input: "1111222333"
+  Encoded [count value] pairs (hex): [04 31] [03 32] [03 33] 
+  Original: 10 bytes | Records: 3 | Encoded: 6 bytes
+  Encoded/original: 0.600 | Space saved: 40.0%
+  Decoded equals input: PASS
+
+pixel_row
+  Input: "00000000111111110000000011111111"
+  Encoded [count value] pairs (hex): [08 30] [08 31] [08 30] [08 31] 
+  Original: 32 bytes | Records: 4 | Encoded: 8 bytes
+  Encoded/original: 0.250 | Space saved: 75.0%
+  Decoded equals input: PASS
+
+empty
+  Input: ""
+  Encoded [count value] pairs (hex): 
+  Original: 0 bytes | Records: 0 | Encoded: 0 bytes
+  Encoded/original and space saved: N/A (empty input)
+  Decoded equals input: PASS
+
+run_300
+  Input: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... (preview)"
+  Encoded [count value] pairs (hex): [FF 41] [2D 41] 
+  Original: 300 bytes | Records: 2 | Encoded: 4 bytes
+  Encoded/original: 0.013 | Space saved: 98.7%
+  Decoded equals input: PASS

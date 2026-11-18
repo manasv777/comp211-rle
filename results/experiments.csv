@@ -1,0 +1,10 @@
+case,input_bytes,records,encoded_bytes,encoded_over_original,space_saved_percent,round_trip
+long_runs,18,3,6,0.333333,66.666667,PASS
+one_run,12,1,2,0.166667,83.333333,PASS
+pairs,8,4,8,1.000000,0.000000,PASS
+alternating,12,12,24,2.000000,-100.000000,PASS
+repeated_sequence,12,12,24,2.000000,-100.000000,PASS
+digit_values,10,3,6,0.600000,40.000000,PASS
+pixel_row,32,4,8,0.250000,75.000000,PASS
+empty,0,0,0,NA,NA,PASS
+run_300,300,2,4,0.013333,98.666667,PASS
